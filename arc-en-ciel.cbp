@@ -32,7 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add library="../../../../usr/local/lib/libhl++.a" />
+		</Linker>
+		<Unit filename="ArcEnCiel.cpp" />
+		<Unit filename="ArcEnCiel.h" />
+		<Unit filename="Context.cpp" />
+		<Unit filename="Context.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="md5.cpp" />
+		<Unit filename="md5.h" />
+		<Unit filename="sha1.cpp" />
+		<Unit filename="sha1.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
