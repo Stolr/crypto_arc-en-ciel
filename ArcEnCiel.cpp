@@ -26,10 +26,38 @@ void ArcEnCiel::trier()
 // Sauvegarde la table sur disque.
 void ArcEnCiel::save( std::string name )
 {
+    /*ofstream monFlux(name);
+
+    if(monFlux)
+    {
+        for(int i = 0 ; i < _M ; i++)
+        {
+            monFlux << _X[i]->idx1 << "||" << _X[i]->idxT << endl;
+        }
+        monFlux.close();
+    }
+    else
+    {
+        cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+    }*/
 }
 // Charge en mémoire la table à partir du disque.
 void ArcEnCiel::load( std::string name )
 {
+    ifstream monFlux(name);
+
+    if(monFlux)
+    {
+        for(int i = 0 ; i < _M ; i++)
+        {
+            monFlux << _X[i]->idx1 << "||" << _X[i]->idxT << endl;
+        }
+        monFlux.close();
+    }
+    else
+    {
+        cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+    }
 }
 // Recherche dichotomique dans la table
 // ( p et q sont le premier/dernier trouvé )

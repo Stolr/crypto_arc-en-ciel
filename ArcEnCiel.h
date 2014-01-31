@@ -1,6 +1,8 @@
 #ifndef ARCENCIEL_H
 #define ARCENCIEL_H
 #include <stdint.h>
+#include <iostream>
+#include <fstream>
 #include "Context.h"
 
 struct Chaine {
