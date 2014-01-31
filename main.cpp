@@ -15,6 +15,7 @@ int main()
     unsigned char empreinte[255];
     string clair = "grape";
     uint64_t index;
+    uint64_t index2;
 
     cout << "Hello world!" << endl;
 
@@ -31,7 +32,20 @@ int main()
 
     cout << " clair: " << clair << endl;
 
-    cout << "index aleatoire: " << myContext.randIndex();
+/////////////////////////////////////////////////////::
+    myContext.h(clair, empreinte);
+    printf("Essai %s ", empreinte);
+    cout << " crypte: "  << endl;
+
+    index2 = myContext.h2i(1, empreinte);
+
+    cout << " index: " << index2 << endl;
+
+    cout << "--------------------------" << endl;
+
+    cout << "second index: " << myContext.i2i(index, 1);
+
+    cout << "--------------------------" << endl;
 
     myArc.creer(myContext,0,100,100);
 

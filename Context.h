@@ -25,7 +25,7 @@ public:
   // In: index idx ----> Out: Clair c
   void i2c( uint64_t idx, string & c );
   // In: index idx ----> retourne index (la composée des précédentes)
-  uint64_t i2i(uint64_t idx);
+  uint64_t i2i(uint64_t idx, uint64_t t = 0 );
   // Retourne un indice aléatoire valide.
   uint64_t randIndex();
 
