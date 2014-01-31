@@ -14,9 +14,7 @@ void ArcEnCiel::creer(Context ctxt, int num, int M, int T )
        idx = ctxt.randIndex();
        _X[i].idx1 = idx;
         for(int j=0;j<_T;j++){
-            ctxt.i2c(idx, clair);
-            ctxt.h(clair, empreinte);
-            idx = ctxt.h2i(j, empreinte);
+            idx = ctxt.i2i(idx, j);
         }
         _X[i].idxT = idx;
     }
