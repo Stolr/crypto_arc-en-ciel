@@ -12,11 +12,11 @@ void ArcEnCiel::creer(Context ctxt, int num, int M, int T )
 
     for(int i=0;i<_M;i++){
        idx = ctxt.randIndex();
-       _X[i].idx1 = idx;
+       _X[i]->idxT = idx;
         for(int j=0;j<_T;j++){
             idx = ctxt.i2i(idx, j);
         }
-        _X[i].idxT = idx;
+        _X[i]->idxT = idx;
     }
 }
       // Tri _X suivant idxT.
@@ -55,4 +55,15 @@ void ArcEnCiel::load( std::string name )
 // ( p et q sont le premier/dernier trouvé )
 bool ArcEnCiel::recherche( uint64_t idx, unsigned int & p, unsigned int & q )
 {
+}
+
+
+ArcEnCiel::ArcEnCiel(void)
+{
+    _X = new Chaine[_M];
+}
+
+ArcEnCiel::~ArcEnCiel(void)
+{
+    delete [] _X;
 }

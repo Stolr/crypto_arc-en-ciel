@@ -25,5 +25,8 @@ class ArcEnCiel {
       // Recherche dichotomique dans la table
       // ( p et q sont le premier/dernier trouvé )
       bool recherche( uint64_t idx, unsigned int & p, unsigned int & q );
+
+      ArcEnCiel(void);
+	~ArcEnCiel(void);
 };
 #endif // ARCENCIEL_H
