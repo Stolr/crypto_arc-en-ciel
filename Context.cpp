@@ -21,7 +21,7 @@ uint64_t Context::h2i( uint64_t t, unsigned char* d )
 
     index = (i + t) % _N;
 
-    return i;
+    return index;
 }
 
 uint64_t Context::i2i( uint64_t idx, uint64_t t){
@@ -41,24 +41,20 @@ Context::Context(void)
   _nb_lettres = 26;     // nombre de lettres possibles pour un caractère
   _N = pow(_nb_lettres, _mot_taille_max);          // nombre de mots
     srand (time(NULL));
-  string letters = "azertyuiopqsdfghjklmwxcvbn";
-
-  for(int i = 0; i < _nb_lettres; i++)
-    _lettres[i] = letters[i];
-
+  _lettres = "azertyuiopqsdfghjklmwxcvbn";
 }
 
 void Context::i2c( uint64_t idx, string & c )
 {
-    c.erase();
+    c = "";
     int i=0;
-    while (i<_mot_taille_min || (idx > 0 && i>_mot_taille_max))
+    while (i<_mot_taille_min)
     {
         c += _lettres[idx%_nb_lettres];
+
         idx /= _nb_lettres;
         i++;
     }
-    c += '\0';
 }
 
 Context::~Context(void)

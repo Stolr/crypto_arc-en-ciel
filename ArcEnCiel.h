@@ -17,7 +17,7 @@ class ArcEnCiel {
       unsigned int _T;        // taille de chaque chaine
       Chaine* _X;     // la table elle-meme
       // Creer les M chaînes de taille T, dans le contexte ctxt
-      void creer(Context ctxt, int num, int M, int T );
+      void creer(Context ctxt);
       // Tri _X suivant idxT.
       void trier();
       // Sauvegarde la table sur disque.
@@ -28,7 +28,7 @@ class ArcEnCiel {
       // ( p et q sont le premier/dernier trouvé )
       bool recherche( uint64_t idx, unsigned int & p, unsigned int & q );
 
-      ArcEnCiel(void);
+      ArcEnCiel(int num,unsigned int M, int T );
 	~ArcEnCiel(void);
 };
 #endif // ARCENCIEL_H

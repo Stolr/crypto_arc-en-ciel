@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     Context myContext;
-    ArcEnCiel myArc;
+    ArcEnCiel* myArc = new ArcEnCiel(0,100,100);
     unsigned char empreinte[255];
     string clair = "grape";
     uint64_t index;
@@ -49,9 +49,10 @@ int main()
 
     cout << "rand index: " << myContext.randIndex();
 
-    //myArc.creer(myContext,0,100,100);
-    //cout << "essai M:" << myArc._X[0]->idxT;
-
+    myArc->creer(myContext);
+    myArc->trier();
+    myArc->save("PremierTest.txt");
+    delete myArc;
 
     return 0;
 }
