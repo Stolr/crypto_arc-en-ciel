@@ -47,7 +47,10 @@ int main()
 
     cout << "--------------------------" << endl;
 
-    myArc.creer(myContext,0,100,100);
+    cout << "rand index: " << myContext.randIndex();
+
+    //myArc.creer(myContext,0,100,100);
+    //cout << "essai M:" << myArc._X[0]->idxT;
 
 
     return 0;
