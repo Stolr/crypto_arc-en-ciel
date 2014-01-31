@@ -24,8 +24,14 @@ uint64_t Context::h2i( uint64_t t, unsigned char* d )
     return i;
 }
 
-uint64_t i2i( uint64_t idx ){
+uint64_t Context::i2i( uint64_t idx, uint64_t t){
+    string clair;
+    unsigned char empreinte[255];
 
+    i2c(idx, clair);
+    h(clair, empreinte);
+
+    return h2i(t, empreinte);
 }
 
 Context::Context(void)
@@ -44,13 +50,15 @@ Context::Context(void)
 
 void Context::i2c( uint64_t idx, string & c )
 {
+    c.erase();
     int i=0;
-    while (i<_mot_taille_min || idx > 0)
+    while (i<_mot_taille_min || (idx > 0 && i>_mot_taille_max))
     {
-        c[i] = _lettres[idx%_nb_lettres];
+        c += _lettres[idx%_nb_lettres];
         idx /= _nb_lettres;
         i++;
     }
+    c += '\0';
 }
 
 Context::~Context(void)
