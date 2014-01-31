@@ -1,5 +1,6 @@
 #include "ArcEnCiel.h"
 #include "Context.h"
+#include <stdlib.h>
 
 void ArcEnCiel::creer(Context ctxt)
 {
@@ -61,20 +62,37 @@ void ArcEnCiel::save( std::string name )
 // Charge en mémoire la table à partir du disque.
 void ArcEnCiel::load( std::string name )
 {
-    /*ifstream monFlux(name);
-
-    if(monFlux)
-    {
-        for(int i = 0 ; i < _M ; i++)
-        {
-            monFlux << _X[i]->idx1 << "||" << _X[i]->idxT << endl;
-        }
-        monFlux.close();
-    }
-    else
-    {
-        cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
-    }*/
+      ifstream fichier(name.c_str());
+      uint64_t i = 0, j = 0;
+      if(fichier)
+      {
+          string ligne;
+          string idx="";
+          while(getline(fichier, ligne))
+          {
+             j = 0;
+             idx="";
+             while( ligne[j] != ';')
+             {
+                idx += ligne[j];
+                j++;
+             }
+             j++;
+            _X[i].idx1 = atoi(idx.c_str());
+             idx="";
+             while( ligne[j] != '\0')
+             {
+                idx += ligne[j];
+                j++;
+             }
+             _X[i].idxT = atoi(idx.c_str());
+             i++;
+          }
+       }
+       else
+       {
+          cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+       }
 }
 // Recherche dichotomique dans la table
 // ( p et q sont le premier/dernier trouvé )

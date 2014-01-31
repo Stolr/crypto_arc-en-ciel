@@ -29,6 +29,6 @@ class ArcEnCiel {
       bool recherche( uint64_t idx, unsigned int & p, unsigned int & q );
 
       ArcEnCiel(int num,unsigned int M, int T );
-	~ArcEnCiel(void);
+	  ~ArcEnCiel(void);
 };
 #endif // ARCENCIEL_H

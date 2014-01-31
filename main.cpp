@@ -17,7 +17,7 @@ int main()
     uint64_t index;
     uint64_t index2;
 
-    cout << "Hello world!" << endl;
+    /*cout << "Hello world!" << endl;
 
     myContext.h(clair, empreinte);
 
@@ -47,11 +47,12 @@ int main()
 
     cout << "--------------------------" << endl;
 
-    cout << "rand index: " << myContext.randIndex();
-
-    myArc->creer(myContext);
+    cout << "rand index: " << myContext.randIndex();*/
+    myArc->load("PremierTest.txt");
     myArc->trier();
-    myArc->save("PremierTest.txt");
+    for(int i=0;i<myArc->_M;i++){
+        cout << "Trie: " << myArc->_X[i].idxT <<endl;
+    }
     delete myArc;
 
     return 0;
