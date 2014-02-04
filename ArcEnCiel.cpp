@@ -7,39 +7,45 @@ void ArcEnCiel::creer(Context ctxt)
 
     std::string clair;
     unsigned char empreinte[255];
-    for(int i=0;i<_M;i++){
+    for(int i=0; i<_M; i++)
+    {
 
-       _X[i].idx1 = ctxt.randIndex();
-       _X[i].idxT = _X[i].idx1;
+        _X[i].idx1 = ctxt.randIndex();
+        _X[i].idxT = _X[i].idx1;
 
-        for(int j=0;j<_T;j++){
+        for(int j=0; j<_T; j++)
+        {
             _X[i].idxT = ctxt.i2i(_X[i].idxT, j);
         }
     }
 }
-      // Tri _X suivant idxT.
+// Tri _X suivant idxT.
 void ArcEnCiel::trier()
 {
-  register int a, b, c;
-  int temp;
-  uint64_t t;
+    register int a, b, c;
+    int temp;
+    uint64_t t;
 
-  for(a = 0; a < _M-1; ++a) {
-    temp = 0;
-    c = a;
-    t = _X[ a ].idxT ;
-    for(b = a + 1; b < _M; ++b) {
-      if( _X[ b ].idxT < t) {
-        c = b;
-        t =  _X[ b ].idxT ;
-        temp = 1;
-      }
+    for(a = 0; a < _M-1; ++a)
+    {
+        temp = 0;
+        c = a;
+        t = _X[ a ].idxT ;
+        for(b = a + 1; b < _M; ++b)
+        {
+            if( _X[ b ].idxT < t)
+            {
+                c = b;
+                t =  _X[ b ].idxT ;
+                temp = 1;
+            }
+        }
+        if(temp == 1)
+        {
+            _X[ c ].idxT  =  _X[ a ].idxT ;
+            _X[ a ].idxT  = t;
+        }
     }
-    if(temp == 1) {
-       _X[ c ].idxT  =  _X[ a ].idxT ;
-       _X[ a ].idxT  = t;
-    }
-  }
 }
 // Sauvegarde la table sur disque.
 void ArcEnCiel::save( std::string name )
@@ -62,42 +68,73 @@ void ArcEnCiel::save( std::string name )
 // Charge en mémoire la table à partir du disque.
 void ArcEnCiel::load( std::string name )
 {
-      ifstream fichier(name.c_str());
-      uint64_t i = 0, j = 0;
-      if(fichier)
-      {
-          string ligne;
-          string idx="";
-          while(getline(fichier, ligne))
-          {
-             j = 0;
-             idx="";
-             while( ligne[j] != ';')
-             {
+    ifstream fichier(name.c_str());
+    uint64_t i = 0, j = 0;
+    if(fichier)
+    {
+        string ligne;
+        string idx="";
+        while(getline(fichier, ligne))
+        {
+            j = 0;
+            idx="";
+            while( ligne[j] != ';')
+            {
                 idx += ligne[j];
                 j++;
-             }
-             j++;
+            }
+            j++;
             _X[i].idx1 = atoi(idx.c_str());
-             idx="";
-             while( ligne[j] != '\0')
-             {
+            idx="";
+            while( ligne[j] != '\0')
+            {
                 idx += ligne[j];
                 j++;
-             }
-             _X[i].idxT = atoi(idx.c_str());
-             i++;
-          }
-       }
-       else
-       {
-          cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
-       }
+            }
+            _X[i].idxT = atoi(idx.c_str());
+            i++;
+        }
+    }
+    else
+    {
+        cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+    }
 }
 // Recherche dichotomique dans la table
 // ( p et q sont le premier/dernier trouvé )
-bool ArcEnCiel::recherche( uint64_t idx, unsigned int & p, unsigned int & q )
+bool ArcEnCiel::recherche( uint64_t idx, Chaine* &p, Chaine* &q )
 {
+    bool trouve;  //vaut faux tant que la valeur "val" n'aura pas été trouvée
+    int id;  //indice de début
+    int ifin;  //indice de fin
+    int im;  //indice de "milieu"
+
+    /* initialisation de ces variables avant la boucle de recherche */
+    trouve = false;  //la valeur n'a pas encore été trouvée
+    id = 0;  //intervalle de recherche compris entre 0...
+    ifin = _M;  //...et nbVal
+
+    /* boucle de recherche */
+    while(!trouve && ((ifin - id) > 1))
+    {
+        im = (id + ifin)/2;  //on détermine l'indice de milieu
+
+        trouve = (_X[im].idxT == idx);  //on regarde si la valeur recherchée est à cet indice
+
+        if(_X[im].idxT > idx) ifin = im;  //si la valeur qui est à la case "im" est supérieure à la valeur recherchée, l'indice de fin "ifin" << devient >> l'indice de milieu, ainsi l'intervalle de recherche est restreint lors du prochain tour de boucle
+        else id = im;  //sinon l'indice de début << devient >> l'indice de milieu et l'intervalle est de la même façon restreint
+    }
+
+    if(_X[id].idxT == idx)
+    {
+        p=&_X[id];
+        q=&_X[id];
+        while ((p-1)->idxT == idx) p--;
+        while ((q+1)->idxT == idx) q++;
+
+        return true;
+    }
+    else return false;  //sinon on retourne -1
 }
 
 
@@ -109,7 +146,7 @@ ArcEnCiel::ArcEnCiel(int num,unsigned int M, int T )
     _X = new Chaine[_M];
 }
 
-ArcEnCiel::~ArcEnCiel(void)
+ArcEnCiel::~ArcEnCiel()
 {
-    delete [] _X;
+    delete[] _X;
 }

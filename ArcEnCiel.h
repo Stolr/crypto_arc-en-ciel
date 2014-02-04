@@ -26,9 +26,9 @@ class ArcEnCiel {
       void load( std::string name );
       // Recherche dichotomique dans la table
       // ( p et q sont le premier/dernier trouvé )
-      bool recherche( uint64_t idx, unsigned int & p, unsigned int & q );
+      bool recherche( uint64_t idx, Chaine* &p, Chaine* &q );
 
       ArcEnCiel(int num,unsigned int M, int T );
-	  ~ArcEnCiel(void);
+	  virtual ~ArcEnCiel();
 };
 #endif // ARCENCIEL_H

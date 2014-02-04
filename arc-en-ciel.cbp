@@ -39,6 +39,8 @@
 		<Unit filename="ArcEnCiel.h" />
 		<Unit filename="Context.cpp" />
 		<Unit filename="Context.h" />
+		<Unit filename="Cracker.cpp" />
+		<Unit filename="Cracker.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="md5.cpp" />
 		<Unit filename="md5.h" />
