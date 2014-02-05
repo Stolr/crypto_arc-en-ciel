@@ -30,8 +30,6 @@ uint64_t Context::i2i( uint64_t idx, uint64_t t){
 
     i2c(idx, clair);
     h(clair, empreinte);
-    if(clair.compare("ghost") == 0)
-        cout << "trouve: "<< clair << "Index: "<< idx << "t: " << t-1 << "indice generer: " << h2i(t, empreinte) << endl;
 
     return h2i(t, empreinte);
 }
