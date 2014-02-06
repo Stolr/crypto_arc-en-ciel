@@ -15,18 +15,26 @@ using namespace std;
 int main()
 {
     Context myContext;
-    ArcEnCiel* myArc = new ArcEnCiel(0,100000,1000);
+    ArcEnCiel* myArc = new ArcEnCiel(0,300000,3000);
     unsigned char mdpCrypt[255];
     string clair;
     Cracker* cracker = new Cracker();
+
+
+    //cout << "Creation du fichier en cours ..." << endl;
     //myArc->creer(myContext);
     //myArc->trier();
-    //myArc->save("PremierTest.txt");
+    //myArc->save("Test_300000_3000.txt");
 
-    myArc->load("PremierTest.txt");
-   cout << " Saisissez le Sha1 a decrypter:\n>";
-   cin.get((char*)mdpCrypt, 255 );
 
+    cout << "Chargement du fichier en cours ..." << endl;
+    myArc->load("Test_300000_3000.txt");
+    cout << "Fichier chargé" << endl;
+
+
+
+    cout << " Saisissez le Sha1 a decrypter:\n>";
+    cin.get((char*)mdpCrypt, 255 );
     cout << endl; // Tres important sinon marche pas
 
     cracker->cracker( mdpCrypt, *myArc, myContext, clair );

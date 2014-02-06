@@ -6,24 +6,28 @@
 #include <time.h>
 #define AES_BLOCK_SIZE 16
 
+
+/*
+    Fonction permettant d'obtenir une empreinte à partir d'un clair
+*/
 void Context::h(string c, unsigned char * d)
 {
     //HashMD5(c, &d);
     HashSHA1(c, d);
 }
 
+/*
+    Fonction permettant d'obtenir un indice à partir d'une empreinte
+*/
 uint64_t Context::h2i( uint64_t t, unsigned char* d )
 {
-    // utilise l'adresse et non la chaine hashé
-    uint64_t index;
-    uint64_t* ptr = (uint64_t*) d; // le tableau de caractères est vu comme un tableau de grand nombre.
-    uint64_t i = *ptr;
-
-    index = (i + t) % _N;
-
-    return index;
+    return (*((uint64_t*) d) + t) % _N;
 }
 
+
+/*
+    Fonction permettant de passer un tour de t en allant d'un indice à son suivant
+*/
 uint64_t Context::i2i( uint64_t idx, uint64_t t){
     string clair;
     unsigned char empreinte[255];
@@ -33,6 +37,8 @@ uint64_t Context::i2i( uint64_t idx, uint64_t t){
 
     return h2i(t, empreinte);
 }
+
+
 
 Context::Context(void)
 {
@@ -44,6 +50,10 @@ Context::Context(void)
   _lettres = "azertyuiopqsdfghjklmwxcvbn";
 }
 
+
+/*
+    Fonction permettant d'obtenir un clair à partir d'un indice
+*/
 void Context::i2c( uint64_t idx, string & c )
 {
     c = "";
@@ -71,6 +81,10 @@ void Context::HashSHA1(string pPlain, unsigned char* pHash)
      convert(sha1(pPlain), pHash);
 }
 
+
+/*
+    Convertir String en unsigned char
+*/
 void Context::convert(const string& s, unsigned char* conv){
 
     for(int i = 0; i < s.length(); i++)
@@ -81,6 +95,9 @@ void Context::convert(const string& s, unsigned char* conv){
     //get rid of the rubbish
 }
 
+/*
+    Permet de générer un index aléatoire
+*/
 uint64_t Context::randIndex(){
 
     unsigned long n1 = random();
@@ -88,6 +105,7 @@ uint64_t Context::randIndex(){
     uint64_t n = ( (uint64_t) n2 ) + ( ( (uint64_t) n1 ) << 32 );
     return n%_N;
 }
+
 
 unsigned long Context::random(){
   /* generate secret number between 1 and 10: */

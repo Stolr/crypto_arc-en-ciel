@@ -10,7 +10,11 @@ Cracker::~Cracker()
     //dtor
 }
 
-bool Cracker::cracker( unsigned char *y, ArcEnCiel aec, Context & ctxt, string & clair )
+
+/*
+Fonction permettant de cracker l'empreinte donnée en paramètre à l'aide des différentes fonctions créées
+*/
+bool Cracker::cracker( unsigned char *y, ArcEnCiel& aec, Context & ctxt, string & clair )
 {
     Chaine* p=0;
     Chaine* q=0;
@@ -43,6 +47,9 @@ bool Cracker::cracker( unsigned char *y, ArcEnCiel aec, Context & ctxt, string &
     return false;
 }
 
+/*
+   Fonction permettant de vérifier si une ligne trouvée contient l'empreinte et donc le clair
+*/
 bool Cracker::verifierAlerte( unsigned char *y, Context  & ctxt, int t,Chaine* m, std::string& clair )
 {
     unsigned char empreinte[255];
@@ -52,20 +59,20 @@ bool Cracker::verifierAlerte( unsigned char *y, Context  & ctxt, int t,Chaine* m
     {
         ctxt.i2c(idx, clair);
         ctxt.h(clair, empreinte);
-        idx = ctxt.i2i(idx, i);
 
+        // opti :
+        idx = ctxt.h2i(i, empreinte);
+        //idx = ctxt.i2i(idx, i);
+
+        // verification du l'empreinte
         int j = 0;
+
         while (empreinte[j] == y[j])
         {
-            //cout << empreinte[j] << y[j] << endl;
             j++;
-            if(y[j] == '\0')
-            {
-                return true;
-            }
+            if(y[j] == '\0') return true;
         }
     }
     clair =" Aucune correspondance";
-    //cout << "----------------" << endl;
     return false;
 }

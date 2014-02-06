@@ -2,6 +2,10 @@
 #include "Context.h"
 #include <stdlib.h>
 
+
+/*
+    Fonction qui nous permet de créer notre table arc en ciel
+*/
 void ArcEnCiel::creer(Context ctxt)
 {
 
@@ -19,7 +23,10 @@ void ArcEnCiel::creer(Context ctxt)
         }
     }
 }
-// Tri _X suivant idxT.
+
+/*
+    Fonction permettant de trier la table arc en ciel par ordre décroissant des derniers indices
+*/
 void ArcEnCiel::trier()
 {
     register int a, b, c;
@@ -100,8 +107,11 @@ void ArcEnCiel::load( std::string name )
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
     }
 }
-// Recherche dichotomique dans la table
-// ( p et q sont le premier/dernier trouvé )
+
+/*
+    Fonction de rechercher par dichotomie
+    Celle-ci retourne un encadrement de lignes qui correspondent : au premier indice de la première ligne contenant l'indice recherché jusqu'au dernier indice de la derniere ligne contenant l'indice à rechercher
+*/
 bool ArcEnCiel::recherche( uint64_t idx, Chaine* &p, Chaine* &q )
 {
     bool trouve;  //vaut faux tant que la valeur "val" n'aura pas été trouvée
