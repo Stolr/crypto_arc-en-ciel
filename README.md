@@ -19,8 +19,11 @@
 	
 	-------------------------- AVANCEMENT --------------------------------
 	
-Nous avons déjà créé un menu basique pour effectuer les actions décrites ci-dessus via la console mais celui-ci n'est pas décommenté dans le main.cpp
+Nous avons déjà créé un menu basique pour effectuer les actions décrites ci-dessus via la console mais celui-ci n'est pas décommenté dans le main.cpp (Partie 0)
 
-Au niveau du programme, toutes les fonctions sont implémentées, le programme tourne, mais il semble qu'il ne trouve pas beaucoup de mots et soit un peu lent.
+Au niveau du programme, toutes les fonctions sont implémentées, le programme tourne, mais il semble qu'il ne trouve pas beaucoup de mots et soit un peu lent. 
 Nous n'arrivons pas à comprendre d'où proviennent ces problèmes car toutes nos fonctions renvoient des valeurs correctes.
+
+Avec Test_100000_1000.txt mot alphabet de 26 lettre et mot de taille fixe 5 lettres nous arrivons a trouver les mots fruit, singe, ghost ... 
+
  
