@@ -27,3 +27,4 @@ Nous n'arrivons pas à comprendre d'où proviennent ces problèmes car toutes no
 Avec Test_100000_1000.txt mot alphabet de 26 lettre et mot de taille fixe 5 lettres nous arrivons a trouver les mots fruit, singe, ghost ... 
 
  
+Avec Test_300000_3000.txt le programme est très lent me semble trouver tous les mots que nous lui demandons en 5 lettres taille fixe alphabet de 26 lettres.
